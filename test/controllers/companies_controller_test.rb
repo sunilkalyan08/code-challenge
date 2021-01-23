@@ -4,7 +4,7 @@ require "application_system_test_case"
 class CompaniesControllerTest < ApplicationSystemTestCase
 
   def setup
-    @company = companies(:hometown_painting)
+    @company = companies(:kalyan_new_painting)
   end
 
   test "Index" do
@@ -21,7 +21,7 @@ class CompaniesControllerTest < ApplicationSystemTestCase
     assert_text @company.name
     assert_text @company.phone
     assert_text @company.email
-    assert_text "City, State"
+    assert_text "#{@company.city}, #{@company.state_code}"
   end
 
   test "Update" do
@@ -47,7 +47,8 @@ class CompaniesControllerTest < ApplicationSystemTestCase
       fill_in("company_name", with: "New Test Company")
       fill_in("company_zip_code", with: "28173")
       fill_in("company_phone", with: "5553335555")
-      fill_in("company_email", with: "new_test_company@test.com")
+      fill_in("company_email", with: "new_test_company@getmainstreet.com")
+      fill_in("company_color", with: "#bb00ff")
       click_button "Create Company"
     end
 
@@ -56,6 +57,25 @@ class CompaniesControllerTest < ApplicationSystemTestCase
     last_company = Company.last
     assert_equal "New Test Company", last_company.name
     assert_equal "28173", last_company.zip_code
+  end
+
+  test "Destroy" do
+    visit companies_path
+    company_name = @company.name
+    companies_count = find_all('#destroy_company').size
+    find_all('#destroy_company')[0].click
+    page.driver.browser.switch_to.alert.accept
+  end
+
+  test 'invalid_zipcode_fetch_city_and_state' do
+    visit edit_company_path(@company)
+    within("form#edit_company_#{@company.id}") do
+      fill_in('company_zip_code', with: "93009", fill_options: {clear: :backspace})
+      click_button 'Update Company'
+      @company.reload
+      assert_equal "Ventura", @company.city
+      assert_equal "CA", @company.state_code
+    end
   end
 
 end

@@ -39,3 +39,13 @@ brown_painting:
   zip_code:
   phone: "555-808-8888"
   services: "{Interior Painting}"   
+
+kalyan_new_painting:
+  name: "Kalyan Electric Purple Painting"
+  email: "kalyan@getmainstreet.com"
+  zip_code: "53006"
+  phone: "8056162521"
+  services: "{Interior Painting, Commercial Painting, Exterior Painting}"
+  color: "#bb00ff"
+  city: "Brownsville"
+  state_code: "WI"

@@ -53,7 +53,7 @@
       </div>
       <div class="col-lg offset-lg-1">
         <div class="form-group">
-          <%= f.text_field :email, class: "form-control", placeholder: "hello@company.com"%>
+          <%= f.text_field :email, class: "form-control", placeholder: "hello@getmainstreet.com"%>
         </div>
       </div>
     </div>
@@ -66,6 +66,17 @@
           <div data-controller="services" class="form-group">
             <%= f.select :services, options_for_select(["Interior Painting", "Commercial Painting", "Exterior Painting"], @company.services), {include_blank: true, required: false}, multiple: true, "data-target": "services.select2", class: "form-control" %>
           </div>
+      </div>
+    </div>
+
+    <div class="row my-lg-3">
+      <div class="col-md-4">
+        <label><strong>Pick a color</strong><br><small class="text-muted">Default color is selected</small></label>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.color_field :color, class: "form-control"%>
+        </div>
       </div>
     </div>
 

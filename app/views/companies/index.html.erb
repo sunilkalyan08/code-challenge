@@ -2,13 +2,20 @@
   <h3>Companies</h3>
   <%= link_to "+ Create a Company", new_company_path %><br>
   <% if @companies.empty? %>
-  <p>No Companies Found</p>
+    <p>No Companies Found</p>
   <% else %>
     <ul class="list-group my-5">
       <% @companies.each do |company| %>
-        <a href="<%= company_path(company) %>" class="list-group-item list-group-item-action">
-          <%= company.name %>
-        </a>
+      <div class = "row">
+          <div class="col-sm-9">
+            <a href="<%= company_path(company) %>" class="list-group-item list-group-item-action">
+              <%= company.name %>
+            </a>
+          </div>
+          <div class="col-sm-2">
+            <%= link_to 'Delete Company', company, method: :delete, data: { confirm: "Are you sure to delete the company - #{company.name} ?" }, class: "btn btn-danger", id: 'destroy_company' %>
+          </div>
+      </div>
       <% end %>
     </ul>
   <% end %>
